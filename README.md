@@ -39,4 +39,4 @@ In the third form, `UnitTest()` is called with three input arguments and three o
 
 ## License
 
-Released under the GNU GPL v3.0 License.  See the [license](license) file for further details.
+Released under the GNU GPL v3.0 License.  See the [LICENSE](LICENSE) file for further details.
