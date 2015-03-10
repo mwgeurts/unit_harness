@@ -60,7 +60,7 @@ end
 
 % Execute UnitTest without arguments to get the application name, location
 % of reference application, prior applications, test data, and report
-[name, referenceApp, priorApps, testData, report] = UnitTest();
+[appName, referenceApp, priorApps, testData, report] = UnitTest();
 
 %% Initialize Report
 % Retrieve MATLAB version
@@ -315,7 +315,7 @@ end
 % Initialize file list with currentApp
 fList = cell(0);
 f = matlab.codetools.requiredFilesAndProducts(...
-    fullfile(cwd, referenceApp, name));
+    fullfile(cwd, referenceApp, appName));
 
 % Log number of functions found in current application
 if exist('Event', 'file') == 2
@@ -338,7 +338,7 @@ for i = 1:length(priorApps)
 
     % Retrieve priorApp file list
     f = matlab.codetools.requiredFilesAndProducts(...
-        fullfile(cwd, priorApps{i}, name));
+        fullfile(cwd, priorApps{i}, appName));
     
     % Log the number of functions found in prior applications
     if exist('Event', 'file') == 2
