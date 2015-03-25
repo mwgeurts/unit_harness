@@ -31,6 +31,9 @@ function UnitTestHarness(varargin)
 % with this program. If not, see http://www.gnu.org/licenses/.
 
 %% Initialize Application Variables
+% Add parent directory to path
+addpath('..');
+
 % Search for UnitTest
 if exist('UnitTest', 'file') ~= 2
     if exist('Event', 'file') == 2
@@ -46,9 +49,6 @@ if exist('Event', 'file') == 2
     Event('Beginning unit test harness', 'UNIT');
     time = tic;
 end
-
-% Add path to parent directory
-addpath('..');
 
 % Retrieve path to UnitTest
 [cwd, ~, ~] = fileparts(which('UnitTest'));
