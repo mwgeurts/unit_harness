@@ -47,6 +47,9 @@ if exist('Event', 'file') == 2
     time = tic;
 end
 
+% Add path to parent directory
+addpath('..');
+
 % Retrieve path to UnitTest
 [cwd, ~, ~] = fileparts(which('UnitTest'));
 
