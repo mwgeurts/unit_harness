@@ -563,6 +563,8 @@ function info = meminfo()
 %
 %   See also: COMPUTER, ISUNIX, ISMAC
 
+info = struct();
+
 if isunix
     if ismac
         [~, text] = unix('top -l 1');
@@ -570,14 +572,35 @@ if isunix
         fields = fields{1};
         fields( cellfun( 'isempty', fields ) ) = [];
         for i = 1:length(fields)
-            tokens = regexp(fields{i}, ['^PhysMem[^0-9]+([0-9]+)M used', ...
-                '[^0-9]+([0-9]+)M wired[^0-9]+([0-9]+)M unused'], 'tokens');
+            tokens = regexp(fields{i}, ['^PhysMem[^0-9]+([0-9]+)([MGk]) used', ...
+                '[^0-9]+([0-9]+)([MGk]) wired[^0-9]+([0-9]+)([MGk]) unused'], ...
+                'tokens');
             if ~isempty(tokens)
-                info = struct('Used', str2double(tokens{1}{1})*1024^2, ...
-                    'Wired', str2double(tokens{1}{2})*1024^2, ...
-                    'Unused', str2double(tokens{1}{3})*1024^2, ...
-                    'Total', (str2double(tokens{1}{1}) + ...
-                    str2double(tokens{1}{3}))*1024^2);
+                if strcmp(tokens{1}{2}, 'G') 
+                    tokens{1}{1} = str2double(tokens{1}{1})*1024^3;
+                elseif strcmp(tokens{1}{2}, 'M') 
+                    tokens{1}{1} = str2double(tokens{1}{1})*1024^2;
+                elseif strcmp(tokens{1}{2}, 'k') 
+                    tokens{1}{1} = str2double(tokens{1}{1})*1024;
+                end
+                if strcmp(tokens{1}{4}, 'G') 
+                    tokens{1}{3} = str2double(tokens{1}{3})*1024^3;
+                elseif strcmp(tokens{1}{4}, 'M') 
+                    tokens{1}{3} = str2double(tokens{1}{3})*1024^2;
+                elseif strcmp(tokens{1}{4}, 'k') 
+                    tokens{1}{3} = str2double(tokens{1}{3})*1024;
+                end
+                if strcmp(tokens{1}{6}, 'G') 
+                    tokens{1}{5} = str2double(tokens{1}{5})*1024^3;
+                elseif strcmp(tokens{1}{6}, 'M') 
+                    tokens{1}{5} = str2double(tokens{1}{5})*1024^2;
+                elseif strcmp(tokens{1}{6}, 'k') 
+                    tokens{1}{5} = str2double(tokens{1}{5})*1024;
+                end
+                info = struct('Used', tokens{1}{1}, ...
+                    'Wired', tokens{1}{3}, ...
+                    'Unused', tokens{1}{5}, ...
+                    'Total', tokens{1}{1} + tokens{1}{3});
                 break;
             end
         end
@@ -587,12 +610,34 @@ if isunix
         fields = fields{1};
         fields( cellfun( 'isempty', fields ) ) = [];
         for i = 1:length(fields)
-            tokens = regexp(fields{i}, ['^Mem[^0-9]+([0-9]+)k total', ...
-                '[^0-9]+([0-9]+)k used[^0-9]+([0-9]+)M free'], 'tokens');
+            tokens = regexp(fields{i}, ['^Mem[^0-9]+([0-9]+)([MGk]) total', ...
+                '[^0-9]+([0-9]+)([MGk]) used[^0-9]+([0-9]+)([MGk]) free'], ...
+                'tokens');
             if ~isempty(tokens)
-                info = struct('Total', str2double(tokens{1}{1})*1024, ...
-                    'Used', str2double(tokens{1}{2})*1024, ...
-                    'Unused', str2double(tokens{1}{3})*1024);
+                if strcmp(tokens{1}{2}, 'G') 
+                    tokens{1}{1} = str2double(tokens{1}{1})*1024^3;
+                elseif strcmp(tokens{1}{2}, 'M') 
+                    tokens{1}{1} = str2double(tokens{1}{1})*1024^2;
+                elseif strcmp(tokens{1}{2}, 'k') 
+                    tokens{1}{1} = str2double(tokens{1}{1})*1024;
+                end
+                if strcmp(tokens{1}{4}, 'G') 
+                    tokens{1}{3} = str2double(tokens{1}{3})*1024^3;
+                elseif strcmp(tokens{1}{4}, 'M') 
+                    tokens{1}{3} = str2double(tokens{1}{3})*1024^2;
+                elseif strcmp(tokens{1}{4}, 'k') 
+                    tokens{1}{3} = str2double(tokens{1}{3})*1024;
+                end
+                if strcmp(tokens{1}{6}, 'G') 
+                    tokens{1}{5} = str2double(tokens{1}{5})*1024^3;
+                elseif strcmp(tokens{1}{6}, 'M') 
+                    tokens{1}{5} = str2double(tokens{1}{5})*1024^2;
+                elseif strcmp(tokens{1}{6}, 'k') 
+                    tokens{1}{5} = str2double(tokens{1}{5})*1024;
+                end
+                info = struct('Total', tokens{1}{1}, ...
+                    'Used', tokens{1}{3}, ...
+                    'Unused', tokens{1}{5});
                 break;
             end
         end
