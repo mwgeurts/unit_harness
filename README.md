@@ -7,7 +7,7 @@ by Mark Geurts <mark.w.geurts@gmail.com>
 
 The Automated Unit Test Harness is a function that automatically runs a series of unit tests on the most current and previous versions of an application.  The unit test results are then written to a GitHub Flavored Markdown text file.  This function was designed to be application-independent, and receives the information it needs by executing `UnitTest()`.  Refer to this function within the application for information on how the unit tests are executed. 
 
-This tool is used in various applications, including [viewray_mlc](https://github.com/mwgeurts/viewray_mlc), [viewray_fielduniformity](https://github.com/mwgeurts/viewray_fielduniformity), and [viewray_radiso](https://github.com/mwgeurts/viewray_radiso).
+This tool is used in various applications, including [viewray_mlc](https://github.com/mwgeurts/viewray_mlc), [viewray_fielduniformity](https://github.com/mwgeurts/viewray_fielduniformity), and [viewray_handcalc](https://github.com/mwgeurts/viewray_handcalc).
  
 ## Installation
 
