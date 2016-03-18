@@ -5,7 +5,7 @@ by Mark Geurts <mark.w.geurts@gmail.com>
 
 ## Description
 
-The Automated Unit Test Harness is a function that runs a series of unit tests on a current and previous versions of an application.  The unit test results are then written to a GitHub Flavored Markdown text file.  This function was designed to be application-independent, and receives the reference information it needs by executing the `UnitTest()` function included with the application. This tool is used in various applications, including [viewray_mlc](https://github.com/mwgeurts/viewray_mlc), [viewray_fielduniformity](https://github.com/mwgeurts/viewray_fielduniformity), and [viewray_handcalc](https://github.com/mwgeurts/viewray_handcalc).
+The Automated Unit Test Harness is a function that runs a series of unit tests on a current and previous versions of an application.  The unit test results are then written to a GitHub Flavored Markdown text file.  This function was designed to be application-independent, and receives the reference information it needs by executing the `UnitTest()` function included with the application. This function is used in various applications, including [viewray_mlc](https://github.com/mwgeurts/viewray_mlc), [viewray_fielduniformity](https://github.com/mwgeurts/viewray_fielduniformity), and [viewray_handcalc](https://github.com/mwgeurts/viewray_handcalc).
  
 ## Installation
 
@@ -35,7 +35,7 @@ In the third form, `UnitTest()` is called with three input arguments and three o
      fullfile(cwd, testData{i,2}), reference);
 ```
 
-Refer to the `UnitTest()` function in one of the applications listed above for more information. 
+Refer to the `UnitTest()` function in one of the applications listed above for more information. This function includes the `cpuinfo()` subfunction by Ben Tordoff and a modified form of `sloc()` by Raymond S. Norris.
 
 ## License
 
